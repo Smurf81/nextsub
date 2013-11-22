@@ -21,6 +21,7 @@ require('./lib/db/transport');
 
 // Controllers
 var api = require('./lib/controllers/api');
+var time = require('./lib/controllers/time');
 
 // Express Configuration
 app.configure(function(){
@@ -47,6 +48,8 @@ app.get('/api/ligne/:ligne',api.findByLigne);
 app.post('/api/transports',api.addTransport);
 app.put('/api/transports/:id',api.updateTransport);
 app.delete('/api/transports/:id',api.deleteTransport);
+
+app.get('/time/:ligne/:destination/:station',time.nextTrain);
 
 // Start server
 var port = process.env.PORT || 3000;

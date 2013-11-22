@@ -2,7 +2,8 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for nextsub2}" />
-    <file url="PROJECT" libraries="{angularjs-DefinitelyTyped, express-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{Node.js Dependencies for nextsub2, angularjs-DefinitelyTyped, express-DefinitelyTyped}" />
+    <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
 
