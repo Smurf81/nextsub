@@ -3,7 +3,7 @@ nextsub
 
 install
 =======
-npm install
-npm install -g bower
-bower install
-npm install -g grunt-cli
+<p>npm install</p>
+<p>npm install -g bower</p>
+<p>bower install</p>
+<p>npm install -g grunt-cli</p>
