@@ -22,6 +22,7 @@ require('./lib/db/transport');
 // Controllers
 var api = require('./lib/controllers/api');
 var time = require('./lib/controllers/time');
+var traffic = require('./lib/controllers/traffic');
 
 // Express Configuration
 app.configure(function(){
@@ -43,13 +44,19 @@ app.configure('production', function(){
 });
 
 // Routes
+// Transport
 app.get('/api/transports', api.index);
 app.get('/api/ligne/:ligne',api.findByLigne);
 app.post('/api/transports',api.addTransport);
 app.put('/api/transports/:id',api.updateTransport);
 app.delete('/api/transports/:id',api.deleteTransport);
-
+// Horaire
 app.get('/time/:ligne/:destination/:station',time.nextTrain);
+// Traffic
+app.get('/traffic/rer',traffic.rerTraffic);
+app.get('/traffic/metro',traffic.metroTraffic);
+app.get('/traffic/sncf',traffic.sncfTraffic);
+app.get('/traffic/bus',traffic.busTraffic);
 
 // Start server
 var port = process.env.PORT || 3000;
