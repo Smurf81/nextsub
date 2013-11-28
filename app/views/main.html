@@ -25,6 +25,9 @@
     <select ng-show="destinationSelected" ng-model="stationSelected" ng-options="c.station for c in ligneSelected.stations">
         <option value="">-- choose Station --</option>
     </select>
+    <ul ng-repeat="(key,value) in time.times">
+        <ul ng-bind="value"></ul>
+    </ul>
 </div>
 
 <div class="footer">

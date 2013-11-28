@@ -23,7 +23,7 @@ angular.module('nextsubApp')
             if($scope.ligneSelected && $scope.destinationSelected && $scope.stationSelected){
                 Timeservice.getTime($scope.ligneSelected.ligne,$scope.destinationSelected.destination,$scope.stationSelected.station)
                     .success(function(data){
-                        console.log(data);
+                        $scope.time = data;
                 });
             }
         });
