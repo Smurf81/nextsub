@@ -19,7 +19,7 @@ module.exports = function (grunt) {
     },
     express: {
         options: {
-            port: process.env.PORT || 80
+            port: process.env.PORT || 9000
         },
         dev: {
             options: {
