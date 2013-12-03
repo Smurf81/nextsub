@@ -15,10 +15,6 @@ angular.module('nextsubApp')
             $scope.trafficBUS = data;
         });
 
-        Transportlistservice.allTransports().success(function(data){
-            $scope.transports = data;
-        });
-
         $scope.$watch('stationSelected',function(event){
             if($scope.ligneSelected && $scope.destinationSelected && $scope.stationSelected){
                 Timeservice.getTime($scope.ligneSelected.ligne,$scope.destinationSelected.destination,$scope.stationSelected.station)
@@ -27,4 +23,34 @@ angular.module('nextsubApp')
                 });
             }
         });
-  });
+  })
+    .controller('TimeCtrl', function($scope,Transportlistservice,Timeservice){
+
+        $scope.network = function(selectedNetwork){
+            $scope.selectedNetwork = selectedNetwork;
+            Transportlistservice.findByReseau($scope.selectedNetwork).success(function(data){
+                $scope.listNetwork = data.lignes;
+            });
+        }
+
+        $scope.selectLine = function(selectedLine){
+            $scope.selectedLine = selectedLine.network.ligne;
+            Transportlistservice.findDestination($scope.selectedNetwork,$scope.selectedLine).success(function(data){
+                $scope.listDestination = data;
+            });
+        }
+
+        $scope.selectDest = function(selectedDesti){
+            $scope.selectedDestination = selectedDesti;
+            Transportlistservice.findStation($scope.selectedDestination.id).success(function(data){
+                $scope.listStations = data;
+            });
+        }
+
+        $scope.selectSta = function(selectedSta){
+            $scope.selectedStation = selectedSta;
+            Timeservice.getTime(4,$scope.selectedDestination.id,$scope.selectedStation.id).success(function(data){
+                $scope.times = data;
+            })
+        }
+    });

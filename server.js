@@ -47,7 +47,9 @@ app.configure('production', function(){
 // Routes
 // Transport
 app.get('/api/transports', api.index);
-app.get('/api/ligne/:ligne',api.findByLigne);
+app.get('/api/reseau/:reseau',api.findByReseau);
+app.get('/api/reseau/:reseau/:line',api.findDestination);
+app.get('/api/destination/:destination',api.findStation);
 app.post('/api/transports',api.addTransport);
 app.put('/api/transports/:id',api.updateTransport);
 app.delete('/api/transports/:id',api.deleteTransport);

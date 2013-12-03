@@ -18,9 +18,9 @@
                 <thead>
                     <tr>
                         <td><img src="../images/RER.svg" width="30px" height="30px"></td>
-                        <td><img src="../images/Metro-M.svg" width="30px" height="30px"></td>
+                        <td><img src="../images/METRO.svg" width="30px" height="30px"></td>
                         <td><img src="../images/SNCF.svg" width="30px" height="30px"></td>
-                        <td><img src="../images/bus.svg" width="30px" height="30px"></td>
+                        <td><img src="../images/BUS.svg" width="30px" height="30px"></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,20 +50,63 @@
             </table>
         </div>
 
-<div class="row marketing">
+<div class="row marketing" ng-controller="TimeCtrl">
     <h1>Horaire</h1>
-    <select ng-model="ligneSelected" ng-options="c.ligne for c in transports">
-        <option value="">-- choose Sub --</option>
-    </select>
-    <select ng-show="ligneSelected" ng-model="destinationSelected" ng-options="c.destination for c in ligneSelected.destinations">
-        <option value="">-- choose Dest --</option>
-    </select>
-    <select ng-show="destinationSelected" ng-model="stationSelected" ng-options="c.station for c in ligneSelected.stations">
-        <option value="">-- choose Station --</option>
-    </select>
-    <ul ng-repeat="(key,value) in time.times">
-        <ul ng-bind="value"></ul>
+    <table class="table" ng-show="!selectedNetwork">
+        <thead>
+        <tr>
+            <td ng-click="network('RER')" class="network" ng-class="{'network-selected': selectedNetwork}">
+                <img src="../images/RER.svg" width="30px" height="30px" >
+            </td>
+            <td ng-click="network('METRO')" class="network">
+                <img src="../images/METRO.svg" width="30px" height="30px">
+            </td>
+            <td ng-click="network('SNCF')" class="network">
+                <img src="../images/SNCF.svg" width="30px" height="30px" >
+            </td>
+            <td ng-click="network('BUS')" class="network">
+                <img src="../images/BUS.svg" width="30px" height="30px">
+            </td>
+        </tr>
+        </thead>
+    </table>
+    <table class="table" ng-if="selectedNetwork" ng-show="selectedNetwork && !selectedLine">
+        <tr>
+            <td class="network-selected">
+                <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" >
+            </td>
+            <td ng-show="listNetwork" ng-repeat="network in listNetwork">
+                <img ng-src="../images/{{selectedNetwork}}_{{network.ligne}}.svg" width="30px" height="30px" ng-bind="network.ligne" ng-click="selectLine(this)">
+            </td>
+        </tr>
+    </table>
+    <table class="table" ng-if="selectedLine" ng-show="!selectedDestination">
+        <tr>
+            <td class="network-selected">
+                <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" >
+            </td>
+            <td class="network-selected">
+                <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px" >
+            </td>
+            <td>
+                <ul class="unstyled" ng-repeat="dest in listDestination">
+                    <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <ul class="list-inline" ng-if="listStations" ng-show="listStations">
+        <li><img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" ></li>
+        <li><img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px" ></li>
+        <li><label ng-bind="selectedDestination.destination"></label></li>
+        <li>
+            <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)"></select>
+        </li>
+        <ul ng-repeat="(key,value) in time.times" ng-show="times">
+            <ul ng-bind="value"></ul>
+        </ul>
     </ul>
+    {{times}}
 </div>
 
 </div>
