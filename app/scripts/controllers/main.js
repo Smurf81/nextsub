@@ -15,14 +15,20 @@ angular.module('nextsubApp')
             $scope.trafficBUS = data;
         });
 
-        $scope.$watch('stationSelected',function(event){
-            if($scope.ligneSelected && $scope.destinationSelected && $scope.stationSelected){
-                Timeservice.getTime($scope.ligneSelected.ligne,$scope.destinationSelected.destination,$scope.stationSelected.station)
-                    .success(function(data){
-                        $scope.time = data;
-                });
-            }
-        });
+        $scope.reload = function(){
+            Trafficservice.getTraffic('rer').success(function(data){
+                $scope.trafficRER = data;
+            });
+            Trafficservice.getTraffic('metro').success(function(data){
+                $scope.trafficMetro = data;
+            });
+            Trafficservice.getTraffic('sncf').success(function(data){
+                $scope.trafficSNCF = data;
+            });
+            Trafficservice.getTraffic('bus').success(function(data){
+                $scope.trafficBUS = data;
+            });
+        }
   })
     .controller('TimeCtrl', function($scope,Transportlistservice,Timeservice){
 
@@ -68,6 +74,19 @@ angular.module('nextsubApp')
                 Timeservice.getTime(id_network,$scope.selectedDestination.id,$scope.selectedStation.id).success(function(data){
                     $scope.times = data;
                 })
+            }
+        }
+
+        $scope.clear = function(type){
+            switch(type){
+                case 'network':
+                    $scope.selectedNetwork = undefined;
+                case 'line':
+                    $scope.selectedLine = undefined;
+                case 'destination':
+                    $scope.selectedDestination = undefined;
+                case 'station':
+                    $scope.selectedStation = undefined;
             }
         }
     });

@@ -12,7 +12,7 @@
 
         <p>Avec NextSub, informez vous en direct du traffic et des horaires RATP et SNCF sur une seule page.</p>
 
-        <h1>Traffic</h1>
+        <h1>Traffic &nbsp;<img src="../images/reload.svg" width="20px" height="20px" ng-click="reload()"></h1>
         <div>
             <table class="table">
                 <thead>
@@ -82,22 +82,22 @@
     </table>
 
     <ul class="list-inline" ng-show="selectedLine">
-        <li>
+        <li ng-if="selectedNetwork">
             <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px"
-                 ng-click="selectedNetwork=undefined;selectedLine=undefined;selectedDestination=undefined;selectedStation=undefined">
+                 ng-click="clear('network')">
         </li>
-        <li>
+        <li ng-if="selectedNetwork && selectedLine">
             <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px"
-                 ng-click="selectedLine=undefined;selectedDestination=undefined;selectedStation=undefined">
+                 ng-click="clear('line')">
         </li>
         <li style="vertical-align: middle">
-            <label ng-show="selectedDestination" ng-bind="selectedDestination.destination" ng-click="selectedDestination=undefined;selectedStation=undefined"></label>
+            <label ng-show="selectedDestination" ng-bind="selectedDestination.destination" ng-click="clear('destination')"></label>
             <ul class="unstyled" ng-repeat="dest in listDestination" ng-show="!selectedDestination">
                 <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
             </ul>
         </li>
         <li>
-            <label ng-bind="selectedStation.station" ng-click="selectedStation=undefined" size="50px"></label>
+            <label ng-bind="selectedStation.station" ng-click="clear('station')" size="50px"></label>
             <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)" ng-show="!selectedStation && selectedDestination"></select>
         </li>
         <li style="vertical-align: middle" ng-show="selectedStation">
@@ -111,5 +111,5 @@
 
 </div>
 <div class="footer">
-  <p>♥ from the Yeoman team</p>
+  <p></p>
 </div>
