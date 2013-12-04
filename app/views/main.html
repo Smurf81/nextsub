@@ -80,33 +80,33 @@
             </td>
         </tr>
     </table>
-    <table class="table" ng-if="selectedLine" ng-show="!selectedDestination">
-        <tr>
-            <td class="network-selected">
-                <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" >
-            </td>
-            <td class="network-selected">
-                <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px" >
-            </td>
-            <td>
-                <ul class="unstyled" ng-repeat="dest in listDestination">
-                    <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <ul class="list-inline" ng-if="listStations" ng-show="listStations">
-        <li><img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" ></li>
-        <li><img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px" ></li>
-        <li><label ng-bind="selectedDestination.destination"></label></li>
+
+    <ul class="list-inline" ng-show="selectedLine">
         <li>
-            <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)"></select>
+            <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px"
+                 ng-click="selectedNetwork=undefined;selectedLine=undefined;selectedDestination=undefined;selectedStation=undefined">
         </li>
-        <ul ng-repeat="(key,value) in time.times" ng-show="times">
-            <ul ng-bind="value"></ul>
-        </ul>
+        <li>
+            <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px"
+                 ng-click="selectedLine=undefined;selectedDestination=undefined;selectedStation=undefined">
+        </li>
+        <li style="vertical-align: middle">
+            <label ng-show="selectedDestination" ng-bind="selectedDestination.destination" ng-click="selectedDestination=undefined;selectedStation=undefined"></label>
+            <ul class="unstyled" ng-repeat="dest in listDestination" ng-show="!selectedDestination">
+                <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
+            </ul>
+        </li>
+        <li>
+            <label ng-bind="selectedStation.station" ng-click="selectedStation=undefined" size="50px"></label>
+            <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)" ng-show="!selectedStation && selectedDestination"></select>
+        </li>
+        <li style="vertical-align: middle" ng-show="selectedStation">
+            <dl class="dl-horizontal" ng-repeat="t in times.times">
+                <dt>{{t.time}}</dt>
+                <dd>{{t.direction}}</dd>
+            </dl>
+        </li>
     </ul>
-    {{times}}
 </div>
 
 </div>

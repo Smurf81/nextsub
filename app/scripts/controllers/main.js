@@ -49,8 +49,25 @@ angular.module('nextsubApp')
 
         $scope.selectSta = function(selectedSta){
             $scope.selectedStation = selectedSta;
-            Timeservice.getTime(4,$scope.selectedDestination.id,$scope.selectedStation.id).success(function(data){
-                $scope.times = data;
-            })
+            var id_network;
+            switch ($scope.selectedNetwork){
+                case 'RER':
+                    id_network = 4;
+                    break;
+                case 'METRO':
+                    id_network= 2;
+                    break;
+                case 'SNCF':
+                    id_network=3;
+                    break;
+                case 'BUS':
+                    id_network=1;
+                    break;
+            }
+            if(id_network){
+                Timeservice.getTime(id_network,$scope.selectedDestination.id,$scope.selectedStation.id).success(function(data){
+                    $scope.times = data;
+                })
+            }
         }
     });
