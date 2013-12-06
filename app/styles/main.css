@@ -32,7 +32,7 @@ body {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
+@media (min-width: 500px) {
   .container {
     max-width: 730px;
   }
