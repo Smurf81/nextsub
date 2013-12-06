@@ -12,7 +12,7 @@
 
         <p>Avec NextSub, informez vous en direct du traffic et des horaires RATP et SNCF sur une seule page.</p>
 
-        <h1>Traffic &nbsp;<img src="../images/reload.svg" width="20px" height="20px" ng-click="reload()"></h1>
+        <h1>Traffic &nbsp; <img src="../images/reload.svg" width="20px" height="20px" ng-click="reload()"></h1>
         <div>
             <table class="table">
                 <thead>
@@ -50,63 +50,64 @@
             </table>
         </div>
 
-<div class="row marketing" ng-controller="TimeCtrl">
-    <h1>Horaire</h1>
-    <table class="table" ng-show="!selectedNetwork">
-        <thead>
-        <tr>
-            <td ng-click="network('RER')" class="network" ng-class="{'network-selected': selectedNetwork}">
-                <img src="../images/RER.svg" width="30px" height="30px" >
-            </td>
-            <td ng-click="network('METRO')" class="network">
-                <img src="../images/METRO.svg" width="30px" height="30px">
-            </td>
-            <td ng-click="network('SNCF')" class="network">
-                <img src="../images/SNCF.svg" width="30px" height="30px" >
-            </td>
-            <td ng-click="network('BUS')" class="network">
-                <img src="../images/BUS.svg" width="30px" height="30px">
-            </td>
-        </tr>
-        </thead>
-    </table>
-    <table class="table" ng-if="selectedNetwork" ng-show="selectedNetwork && !selectedLine">
-        <tr>
-            <td class="network-selected">
-                <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px" >
-            </td>
-            <td ng-show="listNetwork" ng-repeat="network in listNetwork">
-                <img ng-src="../images/{{selectedNetwork}}_{{network.ligne}}.svg" width="30px" height="30px" ng-bind="network.ligne" ng-click="selectLine(this)">
-            </td>
-        </tr>
-    </table>
+<div class="row marketing" ng-controller="TimesCtrl">
+    <h1>Horaire &nbsp; <img src="../images/reload.svg" width="20px" height="20px" ng-click="reload()"></h1>
+    <div ng-controller="TimeCtrl" ng-repeat="timeToFollow in listTimeToFollow" ng-init="init($index)">
+        <table class="table" ng-show="!selectedNetwork">
+            <thead>
+            <tr>
+                <td ng-click="selectNetwork('RER')" class="network" ng-class="{'network-selected': selectedNetwork}">
+                    <img src="../images/RER.svg" width="30px" height="30px" >
+                </td>
+                <td ng-click="selectNetwork('METRO')" class="network">
+                    <img src="../images/METRO.svg" width="30px" height="30px">
+                </td>
+                <td ng-click="selectNetwork('SNCF')" class="network">
+                    <img src="../images/SNCF.svg" width="30px" height="30px" >
+                </td>
+                <td ng-click="selectNetwork('BUS')" class="network">
+                    <img src="../images/BUS.svg" width="30px" height="30px">
+                </td>
+            </tr>
+            </thead>
+        </table>
 
-    <ul class="list-inline" ng-show="selectedLine">
-        <li ng-if="selectedNetwork">
-            <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px"
-                 ng-click="clear('network')">
-        </li>
-        <li ng-if="selectedNetwork && selectedLine">
-            <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px"
-                 ng-click="clear('line')">
-        </li>
-        <li style="vertical-align: middle">
-            <label ng-show="selectedDestination" ng-bind="selectedDestination.destination" ng-click="clear('destination')"></label>
-            <ul class="unstyled" ng-repeat="dest in listDestination" ng-show="!selectedDestination">
-                <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
-            </ul>
-        </li>
-        <li>
-            <label ng-bind="selectedStation.station" ng-click="clear('station')" size="50px"></label>
-            <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)" ng-show="!selectedStation && selectedDestination"></select>
-        </li>
-        <li style="vertical-align: middle" ng-show="selectedStation">
-            <dl class="dl-horizontal" ng-repeat="t in times.times">
-                <dt>{{t.time}}</dt>
-                <dd>{{t.direction}}</dd>
-            </dl>
-        </li>
-    </ul>
+        <ul class="list-inline" ng-show="selectedNetwork">
+            <li ng-if="selectedNetwork">
+                <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px"
+                     ng-click="clear('network')">
+            </li>
+            <li ng-if="selectedNetwork && selectedLine">
+                <img ng-src="../images/{{selectedNetwork}}_{{selectedLine}}.svg" width="30px" height="30px"
+                     ng-click="clear('line')">
+            </li>
+            <li ng-if="selectedNetwork && !selectedLine" ng-repeat="network in listNetwork" style="padding-left: 25px">
+                <img ng-src="../images/{{selectedNetwork}}_{{network.ligne}}.svg" width="30px" height="30px" ng-bind="network.ligne" ng-click="selectLine(network.ligne)">
+            </li>
+            <li ng-if="selectedLine && selectedDestination" class="size_label_one">
+                <label ng-show="selectedDestination" ng-bind="selectedDestination.destination" ng-click="clear('destination')"></label>
+            </li>
+            <li style="vertical-align: middle" ng-if="selectedLine && !selectedDestination">
+                <ul class="unstyled" ng-repeat="dest in listDestination" ng-show="!selectedDestination">
+                    <label ng-bind="dest.destination" ng-click="selectDest(dest)"></label>
+                </ul>
+            </li>
+            <li class="size_label_two">
+                <label ng-bind="selectedStation.station" ng-click="clear('station')" class="size_label_three"></label>
+                <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)" ng-show="!selectedStation && selectedDestination"></select>
+            </li>
+            <li style="vertical-align: middle" ng-show="selectedStation">
+                <dl class="dl-horizontal" ng-repeat="t in times.times">
+                    <dt>{{t.time}}</dt>
+                    <dd>{{t.direction}}</dd>
+                </dl>
+            </li>
+            <li ng-show="selectedStation">
+                <img ng-show="!alreadyAdd" src="../images/Plus+.svg" width="10px" height="10px" ng-click="add($index)">
+                <img src="../images/Minus-.svg" width="10px" height="10px" ng-click="minus($index)">
+            </li>
+        </ul>
+    </div>
 </div>
 
 </div>

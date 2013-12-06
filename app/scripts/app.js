@@ -6,7 +6,8 @@ angular.module('nextsubApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'ngAnimate'
+  'ngAnimate',
+  'ngCookies'
 ])
   .config(function ($routeProvider) {
     $routeProvider

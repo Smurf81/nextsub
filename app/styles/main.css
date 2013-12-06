@@ -36,7 +36,34 @@ body {
   .container {
     max-width: 730px;
   }
+
+    .size_label_one {
+        width: 150px
+    }
+    .size_label_two {
+        width: 100px
+    }
+    .size_label_three {
+        width: 10px
+    }
 }
+@media only screen
+and (min-width : 1224px) {
+    .container {
+        max-width: 1024px;
+    }
+
+    .size_label_one {
+        width: 250px
+    }
+    .size_label_two {
+        width: 200px
+    }
+    .size_label_three {
+        width: 50px
+    }
+}
+
 .container-narrow > hr {
   margin: 30px 0;
 }
