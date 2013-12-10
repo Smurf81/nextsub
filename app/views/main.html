@@ -1,7 +1,7 @@
 <div class="header">
   <ul class="nav nav-pills pull-right">
     <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Blog</a></li>
+    <li><a href="#/blog">Blog</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
   <h3 class="text-muted">Next Sub In One Click</h3>
@@ -73,7 +73,7 @@
         </table>
 
         <ul class="list-inline" ng-show="selectedNetwork">
-            <li ng-if="selectedNetwork">
+            <li ng-if="selectedNetwork" ng-class="{'visible-for-large':selectedLine}">
                 <img ng-src="../images/{{selectedNetwork}}.svg" width="30px" height="30px"
                      ng-click="clear('network')">
             </li>
@@ -93,7 +93,7 @@
                 </ul>
             </li>
             <li class="size_label_two">
-                <label ng-bind="selectedStation.station" ng-click="clear('station')" class="size_label_three"></label>
+                <label ng-bind="selectedStation.station" ng-click="clear('station')"></label>
                 <select ng-model="selectedStation" ng-options="c.station for c in listStations" ng-change="selectSta(selectedStation)" ng-show="!selectedStation && selectedDestination"></select>
             </li>
             <li style="vertical-align: middle" ng-show="selectedStation">

@@ -33,9 +33,16 @@ body {
 
 /* Customize container */
 @media (min-width: 500px) {
-  .container {
-    max-width: 730px;
-  }
+      .container {
+        max-width: 730px;
+        /*margin-left: 0px;
+        padding-left: 5px;
+        padding-right: 5px;*/
+      }
+
+    li.visible-for-large{
+        display: none;
+    }
 
     .size_label_one {
         width: 150px
@@ -49,18 +56,22 @@ body {
 }
 @media only screen
 and (min-width : 1224px) {
+    li.visible-for-large{
+        display: inline-block;
+    }
+
     .container {
         max-width: 1024px;
     }
 
     .size_label_one {
-        width: 250px
+        width: 350px
     }
     .size_label_two {
         width: 200px
     }
     .size_label_three {
-        width: 50px
+        width: 200px
     }
 }
 
