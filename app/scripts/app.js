@@ -15,6 +15,10 @@ angular.module('nextsubApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/blog', {
+        templateUrl: 'views/blog.html',
+        controller: 'BlogCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
