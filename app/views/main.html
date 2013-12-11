@@ -17,10 +17,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td><img src="../images/RER.svg" width="30px" height="30px"></td>
-                        <td><img src="../images/METRO.svg" width="30px" height="30px"></td>
-                        <td><img src="../images/SNCF.svg" width="30px" height="30px"></td>
-                        <td><img src="../images/BUS.svg" width="30px" height="30px"></td>
+                        <td><traffic network="RER"/></td>
+                        <td><traffic network="METRO"/></td>
+                        <td><traffic network="SNCF"/></td>
+                        <td><traffic network="BUS"/></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +44,18 @@
                             <img src="../images/Feu_vert.svg" width="30px" height="30px" ng-show="trafficBUS.status == 1">
                             <img src="../images/Feu_orange.svg" width="30px" height="30px" ng-show="trafficBUS.status == 2" tooltip-placement="right" tooltip="{{trafficBUS.message}}">
                             <img src="../images/Feu_rouge.svg" width="30px" height="30px" ng-show="trafficBUS.status == 3">
+                        </td>
+                        <td>
+                            <traffic-state state="trafficRER.status"/>
+                        </td>
+                        <td>
+                            <traffic-state state="trafficMetro.status"/>
+                        </td>
+                        <td>
+                            <traffic-state state="trafficSNCF.status"/>
+                        </td>
+                        <td>
+                            <traffic-state state="trafficBUS.status"/>
                         </td>
                     </tr>
                 </tbody>

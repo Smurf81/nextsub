@@ -115,18 +115,38 @@ angular.module('nextsubApp')
             '</code>' +
             '</pre>' +
             '<h3>ExpressJS</h3>' +
-            '<code>Angular-fullstack</code> se base sur <code>ExpressJS</code> un framework un peu plus simple d\'accès que à programmer que NodeJS.' +
+            '<code>Angular-fullstack</code> se base sur <code>ExpressJS</code> un framework un peu plus simple d\'accès à programmer que NodeJS.' +
             ' Il offre des fonctionnalités intéressantes pour la gestion des routes notamment. Voici le fichier <code>server.js</code>:' +
             '<pre>' +
             '<code>' +
-            'var express = require(\'express\'), <br>' +
+            'var express = require(\'express\'),                        //déclaration de express<br>' +
             'path = require(\'path\'), <br>' +
             'fs = require(\'fs\'); <br>' +
             '<br>' +
             'var app = express();<br>' +
             '<br>' +
+            'var db = require(\'./lib/db/mongo\');                      // connection à la base mongo<br>' +
+            '<br>' +
+            'var modelsPath = path.join(__dirname, \'lib/models\');     // Bootstrap Model<br>' +
+            'fs.readdirSync(modelsPath).forEach(function (file) {<br>' +
+            '  require(modelsPath + '/' + file);<br>' +
+            '});<br>' +
+            '<br>' +
+            'require(\'./lib/db/dummydata\');                           // Chargement des données<br>' +
+            '<br>' +
+            'var api = require(\'./lib/controllers/api\');              // Controllers <br>' +
+            '<br>' +
+            'app.get(\'/api/awesomeThings\', api.awesomeThings);        // Route : si le server reçoit un GET sur /api/awesomeThing,<br>' +
+            '                                                           // il va faire appel à la méthode awesomeThings du controller' +
+            '                                                           // api défini au dessus<br>' +
+            'var port = process.env.PORT || 3000;                       // Démarrage du serveur sur le port défini par l\'environnement' +
+            '                                                           // (via Grunt) sinon on prend le port 3000<br>' +
+            'app.listen(port, function () {<br>' +
+            '   console.log(\'Express server listening on port %d in %s mode\', port, app.get(\'env\'));<br>' +
+            '});<br>' +
             '</code>' +
             '</pre>' +
+            '' +
             '</p>'
     }
 
