@@ -20,7 +20,7 @@ angular.module('nextsubApp')
         },
         replace:true,
         link: function(scope, element, attrs){
-            scope.$watch(attrs.state, function(value){
+            scope.$watch('state', function(value){
                 if(value){
                     switch(value){
                         case 1:
