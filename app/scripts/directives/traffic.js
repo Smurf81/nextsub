@@ -12,25 +12,23 @@ angular.module('nextsubApp')
     };
   }).directive('trafficState',function(){
     return{
-        restrict: 'E',
-        template:'<img src="../images/Feu_{{color}}.svg" width="30px" height="30px">',
+        restrict: 'A',
         require:'^?state',
         scope:{
             state:'='
         },
-        replace:true,
         link: function(scope, element, attrs){
             scope.$watch('state', function(value){
                 if(value){
                     switch(value){
                         case 1:
-                            scope.color='vert';
+                            attrs.$set('src','../images/Feu_vert.svg');
                             break;
                         case 2:
-                            scope.color='orange';
+                            attrs.$set('src','../images/Feu_orange.svg');
                             break;
                         case 3:
-                            scope.color='rouge';
+                            attrs.$set('src','../images/Feu_rouge.svg');
                             break;
                     }
                     element.show();

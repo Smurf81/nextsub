@@ -26,36 +26,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <img src="../images/Feu_vert.svg" width="30px" height="30px" ng-show="trafficRER.status == 1">
-                            <img src="../images/Feu_orange.svg" width="30px" height="30px" ng-show="trafficRER.status == 2" tooltip-placement="right" tooltip="{{trafficRER.message}}">
-                            <img src="../images/Feu_rouge.svg" width="30px" height="30px" ng-show="trafficRER.status == 3">
+                            <img traffic-state width="30px" height="30px" state="trafficRER.status" popover-placement="right" popover="{{trafficRER.message}}" popover-trigger="mouseenter"/>
                         </td>
                         <td>
-                            <img src="../images/Feu_vert.svg" width="30px" height="30px" ng-show="trafficMetro.status == 1">
-                            <img src="../images/Feu_orange.svg" width="30px" height="30px" ng-show="trafficMetro.status == 2" tooltip-placement="right" tooltip="{{trafficMetro.message}}">
-                            <img src="../images/Feu_rouge.svg" width="30px" height="30px" ng-show="trafficMetro.status == 3">
+                            <img traffic-state width="30px" height="30px" state="trafficMetro.status" popover-placement="right" popover="{{trafficMetro.message}}" popover-trigger="mouseenter"/>
                         </td>
                         <td>
-                            <img src="../images/Feu_vert.svg" width="30px" height="30px" ng-show="trafficSNCF.status == 1" >
-                            <img src="../images/Feu_orange.svg" width="30px" height="30px" ng-show="trafficSNCF.status == 2" tooltip-placement="right" tooltip="{{trafficSNCF.message}}">
-                            <img src="../images/Feu_rouge.svg" width="30px" height="30px" ng-show="trafficSNCF.status == 3">
+                            <img traffic-state width="30px" height="30px" state="trafficSNCF.status" popover-placement="right" popover="{{trafficSNCF.message}}" popover-trigger="mouseenter"/>
                         </td>
                         <td>
-                            <img src="../images/Feu_vert.svg" width="30px" height="30px" ng-show="trafficBUS.status == 1">
-                            <img src="../images/Feu_orange.svg" width="30px" height="30px" ng-show="trafficBUS.status == 2" tooltip-placement="right" tooltip="{{trafficBUS.message}}">
-                            <img src="../images/Feu_rouge.svg" width="30px" height="30px" ng-show="trafficBUS.status == 3">
-                        </td>
-                        <td>
-                            <traffic-state state="trafficRER.status"/>
-                        </td>
-                        <td>
-                            <traffic-state state="trafficMetro.status"/>
-                        </td>
-                        <td>
-                            <traffic-state state="trafficSNCF.status"/>
-                        </td>
-                        <td>
-                            <traffic-state state="trafficBUS.status"/>
+                            <img traffic-state width="30px" height="30px" state="trafficBUS.status" popover-placement="right" popover="{{trafficBUS.message}}" popover-trigger="mouseenter"/>
                         </td>
                     </tr>
                 </tbody>
